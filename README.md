@@ -1,29 +1,45 @@
-# noteonline
+# Noteonline
 
-This template should help get you started developing with Vue 3 in Vite.
+一个类似与 Note.ms 的开源项目，基于 Vue + Vite，使用 LeanCloud 实现无服务器部署。
 
-## Recommended IDE Setup
+[Demo]() 演示
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## 部署
 
-## Customize configuration
+首先请确保你已符合以下条件
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- 最新版的 Node.js 再进行以下步骤
+- 有一个 LeanCloud 账号
+- 一个已创建好的 LeanCloud 应用
 
-## Project Setup
+第一步，克隆本仓库到本地：
 
-```sh
+```bash
+git clone git@github.com:imtgs/Noteonline.git
+```
+
+第二步，安装依赖：
+
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+第三步，进入`/src/App.vue`，跟改以下代码中的`xxxxxxxxx`为你 LeanCloud 应用的`设置 => 应用凭证`里的 AppID、AppKey
 
-```sh
-npm run dev
+```js
+LC.init({
+  appId: "xxxxxxxxx",
+  appKey: "xxxxxxxxx",
+  serverURL: "https://lc.xshaw.xyz",
+});
 ```
 
-### Compile and Minify for Production
+第四步，运行以下几个命令构建页面：
 
-```sh
+```bash
 npm run build
+cd dist
+cp index.html 404.html 
 ```
+
+现在只需要将`dist`里的文件上传到你喜欢的静态页面托管服务商即可，例如 [Vercel](https://vercel.com)
