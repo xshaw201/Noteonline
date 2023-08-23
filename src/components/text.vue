@@ -24,7 +24,7 @@ if (/[\s\S]+(@info)$/gi.test(Pathname) == true) {
     }
     TextareaRead.value = true
   });
-} else if (Pathname == "/0") {
+} else if (Pathname == "/0") { // 向 Note.ms 致敬
   Textarea.value = `救命啊
 
 ？
