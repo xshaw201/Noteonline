@@ -2,7 +2,7 @@
 
 一个类似与 Note.ms 的开源项目，基于 Vue + Vite，使用 LeanCloud 实现无服务器部署。
 
-[Demo]() 演示
+[Demo](https://note.xshaw.xyz) 演示
 
 ## 目前功能
 
