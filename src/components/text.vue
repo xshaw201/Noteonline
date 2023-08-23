@@ -1,11 +1,11 @@
 <script setup>
-import LC from "leancloud-storage"
-import pangu from "https://cdn.skypack.dev/pangu@4.0.7"
+import LC from "leancloud-storage";
+import pangu from "https://cdn.skypack.dev/pangu@4.0.7";
 import { ref } from "vue";
 
 const Pathname = window.location.pathname;
-const Textarea = ref("")
-const TextareaRead = ref(false)
+const Textarea = ref("");
+const TextareaRead = ref(false);
 
 const query = new LC.Query("Text");
 if (/[\s\S]+(@info)$/gi.test(Pathname) == true) {
@@ -22,22 +22,21 @@ if (/[\s\S]+(@info)$/gi.test(Pathname) == true) {
     } else {
       Textarea.value = "此页面尚未创建";
     }
-    TextareaRead.value = true
+    TextareaRead.value = true;
   });
-} else if (Pathname == "/0") { // 向 Note.ms 致敬
+} else if (Pathname == "/0") {
+  // 向 Note.ms 致敬
   Textarea.value = `救命啊
 
 ？
 
 ？
-`
+`;
 } else {
   query.equalTo("path", Pathname);
   query.find().then((students) => {
     if (students[0] != null) {
-      Textarea.value = pangu.spacing(
-        students[0]["attributes"]["content"]
-      );
+      Textarea.value = pangu.spacing(students[0]["attributes"]["content"]);
     } else {
       const Text = LC.Object.extend("Text");
       const text = new Text();
@@ -52,18 +51,20 @@ if (/[\s\S]+(@info)$/gi.test(Pathname) == true) {
 function updata() {
   query.find().then((students) => {
     if (students[0]["id"] != null) {
-      const text = LC.Object.createWithoutData("Text", students[0]["id"]);
-      const Http = new XMLHttpRequest();
-      const url = "https://tenapi.cn/v2/getip";
-      Http.open("GET", url);
-      Http.send();
-      Http.onreadystatechange = (e) => {
-        if (Http.responseText != null) {
-          text.set("info", Http.responseText);
-        }
-        text.set("content", Textarea.value);
-        text.save();
-      };
+      if (Pathname != "/0") {
+        const text = LC.Object.createWithoutData("Text", students[0]["id"]);
+        const Http = new XMLHttpRequest();
+        const url = "https://tenapi.cn/v2/getip";
+        Http.open("GET", url);
+        Http.send();
+        Http.onreadystatechange = (e) => {
+          if (Http.responseText != null) {
+            text.set("info", Http.responseText);
+          }
+          text.set("content", Textarea.value);
+          text.save();
+        };
+      }
     }
   });
 }
