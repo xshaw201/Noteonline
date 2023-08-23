@@ -22,7 +22,7 @@ if (/[\s\S]+(@info)$/gi.test(Pathname) == true) {
     } else {
       Textarea.value = "此页面尚未创建";
     }
-    TextareaRead = true
+    TextareaRead.value = true
   });
 } else if (Pathname == "/0") {
   Textarea.value = `救命啊
